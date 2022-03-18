@@ -2,7 +2,9 @@ package com.techelevator;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Application {
 
@@ -14,7 +16,10 @@ public class Application {
     Employee deanJohnson = new Employee();
     Employee angieSmith = new Employee(2, "Angie", "Smith", "asmith@teams.com", engineering, "08/21/2020");
     Employee margaretThompson = new Employee(3, "Margaret", "Thompson", "mthompson@teams.com", marketing, "08/21/2020");
-
+    Map<String, Project> projects = new HashMap<>();
+    Project teams = new Project("TEams", "Project Management Software", "10/10/2020", "11/10/2020");
+    Project marketingLandingPage = new Project("Marketing Landing Page", "Lead Capture Landing Page for Marketing", "10/10/2020", "10/17/2020");
+    List<Employee> marketingTeamMembers = new ArrayList<>();
     /**
      * The main entry point in the application
      * @param args
@@ -102,14 +107,20 @@ public class Application {
      * Create the 'TEams' project.
      */
     private void createTeamsProject() {
-
+        teams.setTeamMembers(employees);
+        projects.put("TEams", teams);
     }
 
     /**
      * Create the 'Marketing Landing Page' project.
      */
     private void createLandingPageProject() {
-
+            for(Employee employee : employees){
+                if(employee.getDepartment().getName() == "Marketing"){
+                    marketingTeamMembers.add(employee);
+                }
+            }marketingLandingPage.setTeamMembers(marketingTeamMembers);
+            projects.put("Marketing Landing Page", marketingLandingPage);
     }
 
     /**
@@ -117,7 +128,9 @@ public class Application {
      */
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
-
+        for(Map.Entry<String, Project> project: projects.entrySet()){
+            System.out.println(project.getName() + ": " + project.getTeamMembers().size());
+        }
     }
 
 }
