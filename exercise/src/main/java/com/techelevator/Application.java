@@ -93,8 +93,8 @@ public class Application {
     private void printEmployees() {
         System.out.println("\n------------- EMPLOYEES ------------------------------");
 
-        for (Employee employee: employees){
-            System.out.println(employee.getFullName() + " " + employee.getSalary() + " " + employee.getDepartment());
+        for (Employee singular: employees){
+            System.out.println(singular.getFullName() + " " + singular.getSalary() + " " + singular.getDepartment());
         }
     }
 
