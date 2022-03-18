@@ -1,6 +1,16 @@
 package com.techelevator;
 
+import javax.print.attribute.standard.MediaSize;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
+
+    List<Department> departments = new ArrayList<>();
+    List<Employee> employees = new ArrayList<>();
+    Department marketing = new Department(1,"Marketing");
+    Department sales = new Department(2,"Sales");
+    Department engineering = new Department(3,"Engineering");
 
     /**
      * The main entry point in the application
@@ -39,21 +49,33 @@ public class Application {
      * Create departments and add them to the collection of departments
      */
     private void createDepartments() {
+        departments.add(marketing);
+        departments.add(sales);
+        departments.add(engineering);
     }
 
     /**
      * Print out each department in the collection.
      */
     private void printDepartments() {
-        System.out.println("------------- DEPARTMENTS ------------------------------");
-
+        System.out.println("\n------------- DEPARTMENTS ------------------------------");
+        for (Department department : departments)
+        System.out.println(department.getName());
     }
 
     /**
      * Create employees and add them to the collection of employees
      */
     private void createEmployees() {
-
+        Employee deanJohnson = new Employee();
+        deanJohnson.setEmployeeId(1);
+        deanJohnson.setFirstName("Dean");
+        deanJohnson.setLastName("Johnson");
+        deanJohnson.setEmail("djohnson@teams.com");
+        deanJohnson.setSalary(60000);
+        deanJohnson.setDepartment(engineering);
+        deanJohnson.setHireDate("08/21/2020");
+        
     }
 
     /**
