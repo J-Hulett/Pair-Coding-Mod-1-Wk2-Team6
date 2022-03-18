@@ -10,9 +10,9 @@ public class Application {
 
     List<Department> departments = new ArrayList<>();
     List<Employee> employees = new ArrayList<>();
-    Department marketing = new Department(1,"Marketing");
-    Department sales = new Department(2,"Sales");
-    Department engineering = new Department(3,"Engineering");
+    Department marketing = new Department(1, "Marketing");
+    Department sales = new Department(2, "Sales");
+    Department engineering = new Department(3, "Engineering");
     Employee deanJohnson = new Employee();
     Employee angieSmith = new Employee(2, "Angie", "Smith", "asmith@teams.com", engineering, "08/21/2020");
     Employee margaretThompson = new Employee(3, "Margaret", "Thompson", "mthompson@teams.com", marketing, "08/21/2020");
@@ -20,8 +20,11 @@ public class Application {
     Project teams = new Project("TEams", "Project Management Software", "10/10/2020", "11/10/2020");
     Project marketingLandingPage = new Project("Marketing Landing Page", "Lead Capture Landing Page for Marketing", "10/10/2020", "10/17/2020");
     List<Employee> marketingTeamMembers = new ArrayList<>();
+    List<Employee> teamsTeamMembers = new ArrayList<>();
+
     /**
      * The main entry point in the application
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -70,7 +73,7 @@ public class Application {
     private void printDepartments() {
         System.out.println("\n------------- DEPARTMENTS ------------------------------");
         for (Department department : departments)
-        System.out.println(department.getName());
+            System.out.println(department.getName());
     }
 
     /**
@@ -95,11 +98,11 @@ public class Application {
      */
     private void printEmployees() {
         System.out.println("\n------------- EMPLOYEES ------------------------------");
+        
 
-
-        for (Employee singular: employees){
-                System.out.println(singular.getFullName() + " (" + singular.getSalary() + ") " + singular.getDepartment().getName());
-            }
+        for (Employee singular : employees) {
+            System.out.println(singular.getFullName() + " (" + singular.getSalary() + ") " + singular.getDepartment().getName());
+        }
 
     }
 
@@ -107,20 +110,27 @@ public class Application {
      * Create the 'TEams' project.
      */
     private void createTeamsProject() {
-        teams.setTeamMembers(employees);
+        for (Employee employee : employees) {
+            if (employee.getDepartment().getName() == "Engineering") {
+                teamsTeamMembers.add(employee);
+            }
+        }
+        teams.setTeamMembers(teamsTeamMembers);
         projects.put("TEams", teams);
+
     }
 
     /**
      * Create the 'Marketing Landing Page' project.
      */
     private void createLandingPageProject() {
-            for(Employee employee : employees){
-                if(employee.getDepartment().getName() == "Marketing"){
-                    marketingTeamMembers.add(employee);
-                }
-            }marketingLandingPage.setTeamMembers(marketingTeamMembers);
-            projects.put("Marketing Landing Page", marketingLandingPage);
+        for (Employee employee : employees) {
+            if (employee.getDepartment().getName() == "Marketing") {
+                marketingTeamMembers.add(employee);
+            }
+        }
+        marketingLandingPage.setTeamMembers(marketingTeamMembers);
+        projects.put("Marketing Landing Page", marketingLandingPage);
     }
 
     /**
@@ -128,9 +138,8 @@ public class Application {
      */
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
-        for(Map.Entry<String, Project> project: projects.entrySet()){
-            System.out.println(project.getName() + ": " + project.getTeamMembers().size());
+        for (Map.Entry<String, Project> project : projects.entrySet()) {
+            System.out.println(project.getKey() + ": " + project.getValue().getTeamMembers().size());
         }
     }
-
 }
