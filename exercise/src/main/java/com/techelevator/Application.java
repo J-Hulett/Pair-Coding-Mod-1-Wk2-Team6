@@ -14,6 +14,7 @@ public class Application {
     Employee deanJohnson = new Employee();
     Employee angieSmith = new Employee(2, "Angie", "Smith", "asmith@teams.com", engineering, "08/21/2020");
     Employee margaretThompson = new Employee(3, "Margaret", "Thompson", "mthompson@teams.com", marketing, "08/21/2020");
+
     /**
      * The main entry point in the application
      * @param args
@@ -21,8 +22,6 @@ public class Application {
     public static void main(String[] args) {
         Application app = new Application();
         app.run();
-
-
     }
 
     private void run() {
@@ -37,9 +36,6 @@ public class Application {
 
         // give Angie a 10% raise, she is doing a great job!
         angieSmith.raiseSalary(10);
-
-
-
 
 
         // print all employees
@@ -76,7 +72,6 @@ public class Application {
      * Create employees and add them to the collection of employees
      */
     private void createEmployees() {
-
         deanJohnson.setEmployeeId(1);
         deanJohnson.setFirstName("Dean");
         deanJohnson.setLastName("Johnson");
@@ -84,6 +79,9 @@ public class Application {
         deanJohnson.setSalary(60000);
         deanJohnson.setDepartment(engineering);
         deanJohnson.setHireDate("08/21/2020");
+        employees.add(deanJohnson);
+        employees.add(angieSmith);
+        employees.add(margaretThompson);
 
     }
 
@@ -93,9 +91,11 @@ public class Application {
     private void printEmployees() {
         System.out.println("\n------------- EMPLOYEES ------------------------------");
 
+
         for (Employee singular: employees){
-            System.out.println(singular.getFullName() + " " + singular.getSalary() + " " + singular.getDepartment());
-        }
+                System.out.println(singular.getFullName() + " (" + singular.getSalary() + ") " + singular.getDepartment().getName());
+            }
+
     }
 
     /**
