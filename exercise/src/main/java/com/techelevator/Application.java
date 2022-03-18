@@ -1,11 +1,12 @@
 package com.techelevator;
 
 import javax.print.attribute.standard.MediaSize;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.time.LocalDate;
 public class Application {
 
     List<Department> departments = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Application {
     Project marketingLandingPage = new Project("Marketing Landing Page", "Lead Capture Landing Page for Marketing", "10/10/2020", "10/17/2020");
     List<Employee> marketingTeamMembers = new ArrayList<>();
     List<Employee> teamsTeamMembers = new ArrayList<>();
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     /**
      * The main entry point in the application
@@ -98,13 +100,12 @@ public class Application {
      */
     private void printEmployees() {
         System.out.println("\n------------- EMPLOYEES ------------------------------");
-        
-
         for (Employee singular : employees) {
-            System.out.println(singular.getFullName() + " (" + singular.getSalary() + ") " + singular.getDepartment().getName());
+            System.out.println(singular.getFullName() + " (" + currency.format(singular.getSalary()) + ") " + singular.getDepartment().getName());
         }
-
+        //System.out.println(LocalDate.now());
     }
+
 
     /**
      * Create the 'TEams' project.
